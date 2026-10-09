@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="sample" id="sample">
+	<SimpleField name="kind" type="string"></SimpleField>
+</Schema>
+<Folder><name>sample</name>
+  <Placemark id="sample.1">
+	<name>Parcel A</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sample">
+		<SimpleData name="kind">plot</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>75.8,26.9 75.81,26.9 75.81,26.91 75.8,26.91 75.8,26.9</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark id="sample.2">
+	<name>Parcel B</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sample">
+		<SimpleData name="kind">plot</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>75.82,26.9 75.825,26.9 75.825,26.904 75.82,26.904 75.82,26.9</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark id="sample.3">
+	<name>Main road</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#sample">
+		<SimpleData name="kind">road</SimpleData>
+	</SchemaData></ExtendedData>
+      <LineString><coordinates>75.8,26.895 75.81,26.895 75.815,26.9</coordinates></LineString>
+  </Placemark>
+  <Placemark id="sample.4">
+	<name>Well</name>
+	<ExtendedData><SchemaData schemaUrl="#sample">
+		<SimpleData name="kind">point</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>75.805,26.905</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
