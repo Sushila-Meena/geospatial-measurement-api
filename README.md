@@ -58,6 +58,38 @@ Recreate the sample files any time with `python scripts/make_sample_data.py`.
 pytest
 ```
 
+### Screenshots of the running API
+
+Captured from the interactive Swagger UI (`/docs`) while running the app locally with the sample files in `sample_data/`.
+
+**1. Interactive documentation.** The three required endpoints, described automatically from the code.
+
+![Swagger UI showing the three endpoints](docs/screenshots/01-swagger-docs.png)
+
+**2. Upload a KML file.** `POST /api/files/` with `sample_data/sample.kml` returns `201` with status `COMPLETED`, 4 features and CRS `EPSG:4326`.
+
+![Uploading sample.kml returns 201 COMPLETED](docs/screenshots/02-upload-kml-201.png)
+
+**3. Measurements.** `GET /api/files/{id}/measurements/` returns the total area (about 1,319,983 m2) and total length (about 1,737 m), calculated in a projected CRS.
+
+![Measurements response with totals](docs/screenshots/03-measurements-200.png)
+
+**4. Missing CRS is rejected.** A Shapefile without a `.prj` file returns `422`, and the failure is stored with an id so it can be looked up later.
+
+![Shapefile without .prj returns 422](docs/screenshots/04-missing-crs-422.png)
+
+**5. Missing CRS fixed with `assume_crs`.** The same file uploaded with `assume_crs=EPSG:4326` returns `201`.
+
+![Same file with assume_crs=EPSG:4326 returns 201](docs/screenshots/05-assume-crs-201.png)
+
+**6. The failed upload is stored.** `GET /api/files/{id}/` for the failed file returns `200` with the file details (0 features, no CRS) and its error message.
+
+![File info for the failed upload](docs/screenshots/06-failed-file-info-200.png)
+
+**7. No measurements for a failed file.** Asking for measurements of that file returns `409 Conflict`.
+
+![Measurements for a failed file return 409](docs/screenshots/07-failed-file-measurements-409.png)
+
 ---
 
 ## 2. API reference
