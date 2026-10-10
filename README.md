@@ -298,16 +298,11 @@ Each test gets its own in-memory database, so tests are independent and fast (ab
 
 ## 6. What I learned
 
-- **Coordinate systems matter more than the code.** Reading a KML or Shapefile takes a few lines, but I learned that
-  coordinates in degrees can't be turned into square metres directly. I now project to a UTM zone first and check the result against a geodesic calculation.
-- **A missing CRS must not be guessed.** A Shapefile without a `.prj` file gives plausible but wrong numbers if the CRS is assumed silently,
-  so the API returns 422 unless the client sends `assume_crs`.
-- **Failures should be stored, not lost.** When I tested a file with no CRS, the API saved it as `FAILED` and returned an id,
-  so I could look it up with `GET /api/files/{id}/`. Asking for its measurements returns 409.
-- **Real testing finds bugs that tests don't.** While trying the API in Swagger I got a 404 even though the file existed.
-  The id I pasted had leading spaces (`%20` in the URL). I fixed it by stripping whitespace from the id.
-- **Run the app the right way.** Running `main.py` with the Run button failed with `No module named 'app'`;
-  starting it with `python -m uvicorn app.main:app` works because it loads the project as a package.
+- **Coordinate systems matter more than the code.** Reading a KML or Shapefile takes a few lines, but I learned that coordinates in degrees can't be turned into square metres directly. I now project to a UTM zone first and check the result against a geodesic calculation.
+- **A missing CRS must not be guessed.** A Shapefile without a `.prj` file gives plausible but wrong numbers if the CRS is assumed silently, so the API returns 422 unless the client sends `assume_crs`.
+- **Failures should be stored, not lost.** When I tested a file with no CRS, the API saved it as `FAILED` and returned an id, so I could look it up with `GET /api/files/{id}/`. Asking for its measurements returns 409.
+- **Real testing finds bugs that tests don't.** While trying the API in Swagger I got a 404 even though the file existed. The id I pasted had leading spaces (`%20` in the URL). I fixed it by stripping whitespace from the id.
+- **Run the app the right way.** Running `main.py` with the Run button failed with `No module named 'app'`; starting it with `python -m uvicorn app.main:app` works because it loads the project as a package.
 - **Uploaded files are untrusted input.** ZIP files need path checks and size limits (zip-slip, zip bombs) before they are read.
 - **Small, separate functions are easy to test.** `measure_geometry` has no HTTP or database code, so I could test it quickly with known shapes.
 
